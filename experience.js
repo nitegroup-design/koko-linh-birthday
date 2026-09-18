@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 (() => {
   const root = document.documentElement;
   const opening = document.getElementById("opening");
@@ -16,8 +16,8 @@
     inviteText: "Some moments only feel complete with the people we cherish. I would love to raise a glass with you, share a few smiles, and welcome a beautiful new chapter together.",
     inviteText2: "Save this evening for me, won't you?", withLove: "With love,", eveningTitle: "It's a date.",
     eveningSub: "Make room for a special evening.", september: "SEPTEMBER", timeLabel: "WHEN", vietnamTime: "· Vietnam time",
-    fullDate: "Saturday, 26 September 2026", venueLabel: "WHERE", venue: "A little mystery, for now",
-    venueNote: "I'll share the venue with you once it's confirmed.", saveDate: "Add to your calendar", calendarNote: "Let's not miss this moment.",
+    fullDate: "Saturday, 26 September 2026", venueLabel: "WHERE", venue: "Yoyo Central Ho Con Rua - Beer Garden",
+    venueNote: "No. 1 Cong Truong Quoc Te, Xuan Hoa Ward, HCMC", dresscodeLabel: "DRESSCODE", dresscode: "Costume / Cosplay", dresscodeNote: "Dress as your favorite character (Anime, European, Royal...)", saveDate: "Add to your calendar", calendarNote: "Let's not miss this moment.",
     countdownTitle: "UNTIL WE RAISE OUR GLASSES", days: "DAYS", hours: "HOURS", minutes: "MINS", seconds: "SECS",
     bestGift: "THE MOST BEAUTIFUL PART OF THE EVENING", closing1: "The most beautiful gift",
     closing2: "is having you here.", closingText: "Let's make another beautiful memory together.", replay: "Open the invitation again",
@@ -157,12 +157,12 @@
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (!isIOS) {
         e.preventDefault(); // Prevent downloading the file
-        const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Koko+Linh%27s+Birthday+-+The+Ruby+Soir%C3%A9e&dates=20260926T120000Z/20260926T160000Z&details=Time:+19:00+(Vietnam+Time)%0ATheme:+Scarlet+Noir%0AVenue:+A+little+mystery+for+now+(To+be+announced)';
+        const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Koko+Linh%27s+Birthday+-+The+Ruby+Soir%C3%A9e&dates=20260926T110000Z/20260926T150000Z&details=Time:+18:00+(Vietnam+Time)%0ATheme:+Scarlet+Noir%0ADress+Code:+Costume+(Anime,+European,+Royal...)%0AVenue:+Yoyo+Central+Ho+Con+Rua,+No.+1+Cong+Truong+Quoc+Te,+HCMC&location=Yoyo+Central+Ho+Con+Rua,+No.+1+Cong+Truong+Quoc+Te,+HCMC';
         window.open(googleCalendarUrl, '_blank');
     } else {
         const toast = document.getElementById("toast");
         clearTimeout(toastTimer);
-        toast.textContent = say("H? th?ng dang m? l?ch c?a b?n d? luu cu?c h?n. �?a di?m s? du?c c?p nh?t sau.", "Opening your calendar to save the date. The venue will be shared later.");
+        toast.textContent = say("H? th?ng dang m? l?ch c?a b?n d? luu cu?c h?n. �?a di?m s? du?c c?p nh?t sau.", "Opening your calendar to save the date. The venue will be shared later.");
         toast.hidden = false;
         toastTimer = setTimeout(() => { toast.hidden = true; }, 6000);
     }
@@ -314,6 +314,8 @@
   syncLanguage(language);
   if (location.hash) showContent(); else showOpening();
 })();
+
+
 
 
 

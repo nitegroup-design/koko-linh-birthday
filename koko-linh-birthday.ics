@@ -1,0 +1,15 @@
+﻿BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Koko Linh//The Ruby Soiree//VI
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:koko-linh-birthday-20260926@invitation.local
+DTSTAMP:20260914T030000Z
+DTSTART:20260926T120000Z
+DTEND:20260926T160000Z
+SUMMARY:Koko Linh's Birthday - The Ruby Soirée
+DESCRIPTION:Koko Linh's Birthday Party.\n\nTime: 19:00 (Vietnam Time)\nTheme: Scarlet Noir\n\nVenue: A little mystery for now (To be announced).
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

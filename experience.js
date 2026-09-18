@@ -13,7 +13,7 @@
     skip: "Skip to the invitation", honour: "A PERSONAL INVITATION, JUST FOR YOU", celebrating: "CELEBRATING",
     heroLine: "A little mystery. A night to remember.", discover: "Discover the invitation", scroll: "SCROLL TO DISCOVER",
     dearYou: "DEAR YOU", inviteTitle1: "A new chapter.", inviteTitle2: "An evening to call ours.",
-    inviteText: "Some moments only feel complete with the people we cherish. I would love to raise a glass with you, share a few smiles, and welcome a beautiful new chapter together.",
+    inviteText: "With you, my new chapter becomes truly complete! 💗",
     inviteText2: "Save this evening for me, won't you?", withLove: "With love,", eveningTitle: "It's a date.",
     eveningSub: "Make room for a special evening.", september: "SEPTEMBER", timeLabel: "WHEN", vietnamTime: "· Vietnam time",
     fullDate: "Saturday, 26 September 2026", venueLabel: "WHERE", venue: "Yoyo Central Ho Con Rua - Beer Garden",

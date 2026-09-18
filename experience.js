@@ -311,6 +311,7 @@
   resizeCanvas();
   motionButton.hidden = false;
   replayButton.hidden = typeof opening?.showModal !== "function";
+
   syncLanguage(language);
   if (location.hash) showContent(); else showOpening();
 })();
@@ -322,3 +323,24 @@
 
 
 
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dresscodeBtn = document.getElementById("open-dresscode");
+  const dresscodeModal = document.getElementById("dresscode-modal");
+  const closeDresscodeBtn = document.getElementById("close-dresscode");
+  if (dresscodeBtn && dresscodeModal && closeDresscodeBtn) {
+      dresscodeBtn.addEventListener("click", () => {
+          dresscodeModal.showModal();
+      });
+      closeDresscodeBtn.addEventListener("click", () => {
+          dresscodeModal.close();
+      });
+      dresscodeModal.addEventListener("click", (e) => {
+          if (e.target === dresscodeModal) {
+              dresscodeModal.close();
+          }
+      });
+  }
+});

@@ -216,41 +216,7 @@ let audioContext, analyser, dataArray, bgAudio;
           this.step += this.speed * (1 + bass * 2.5); 
       }
   }
-  class Sparkle {
-      constructor(x, y) {
-          this.x = x; this.y = y; this.size = Math.random() * 2.5 + 0.5;
-          this.speedX = (Math.random() - 0.5) * 0.5; this.speedY = -Math.random() * 0.8 - 0.2;
-          this.alpha = 1; this.decay = Math.random() * 0.008 + 0.003;
-          const goldTones = ['rgba(212,175,55,', 'rgba(255,215,0,', 'rgba(244,196,48,'];
-          this.colorBase = goldTones[Math.floor(Math.random() * goldTones.length)];
-      }
-      update(elapsed, bass = 0) { 
-          this.x += this.speedX * elapsed * (1 + bass * 2); 
-          this.y += this.speedY * elapsed * (1 + bass * 3.5); 
-          this.alpha -= this.decay * elapsed; 
-          this.size += bass * 0.1; 
-      }
-      draw(ctx, bass = 0) {
-          ctx.save(); ctx.beginPath(); ctx.arc(this.x, this.y, this.size * (1 + bass), 0, Math.PI * 2);
-          ctx.shadowBlur = this.size * (3 + bass * 12); ctx.shadowColor = 'rgba(255, 215, 0, 1)';
-          ctx.fillStyle = this.colorBase + this.alpha + ')'; ctx.fill(); ctx.restore();
-      }
-  }
-  class Sparkle {
-      constructor(x, y) {
-          this.x = x; this.y = y; this.size = Math.random() * 2.5 + 0.5;
-          this.speedX = (Math.random() - 0.5) * 0.5; this.speedY = -Math.random() * 0.8 - 0.2;
-          this.alpha = 1; this.decay = Math.random() * 0.008 + 0.003;
-          const goldTones = ['rgba(212,175,55,', 'rgba(255,215,0,', 'rgba(244,196,48,'];
-          this.colorBase = goldTones[Math.floor(Math.random() * goldTones.length)];
-      }
-      update() { this.x += this.speedX; this.y += this.speedY; this.alpha -= this.decay; }
-      draw(ctx) {
-          ctx.save(); ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.shadowBlur = this.size * 3; ctx.shadowColor = 'rgba(255, 215, 0, 0.8)';
-          ctx.fillStyle = this.colorBase + this.alpha + ')'; ctx.fill(); ctx.restore();
-      }
-  }
+  
   let waves = [], sparkles = [];
 
   function resizeCanvas() {
@@ -391,3 +357,4 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 });
+

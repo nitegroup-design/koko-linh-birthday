@@ -17,7 +17,7 @@
     inviteText2: "Save this evening for me, won't you?", withLove: "With love,", eveningTitle: "It's a date.",
     eveningSub: "Make room for a special evening.", september: "SEPTEMBER", timeLabel: "WHEN", vietnamTime: "· Vietnam time",
     fullDate: "Saturday, 26 September 2026", venueLabel: "WHERE", venue: "Yoyo Central Ho Con Rua - Beer Garden",
-    venueNote: "No. 1 Cong Truong Quoc Te, Xuan Hoa Ward, HCMC", dresscodeLabel: "DRESSCODE", dresscode: "Costume / Cosplay", dresscodeNote: "Dress as your favorite character (Anime, European, Royal...)", saveDate: "Add to your calendar", calendarNote: "Let's not miss this moment.",
+    venueNote: "No. 1 Cong Truong Quoc Te, Xuan Hoa Ward, HCMC", dresscodeLabel: "DRESSCODE", dresscode: "Costume / Cosplay", dresscodeNote: "Dress as your favorite character (Anime, European, Royal...)", saveDate: "Add to your calendar", openMap: "Open in Maps", calendarNote: "Let's not miss this moment.",
     countdownTitle: "UNTIL WE RAISE OUR GLASSES", days: "DAYS", hours: "HOURS", minutes: "MINS", seconds: "SECS",
     bestGift: "THE MOST BEAUTIFUL PART OF THE EVENING", closing1: "The most beautiful gift",
     closing2: "is having you here.", closingText: "Let's make another beautiful memory together.", replay: "Open the invitation again",
@@ -314,6 +314,7 @@
   syncLanguage(language);
   if (location.hash) showContent(); else showOpening();
 })();
+
 
 
 

@@ -288,7 +288,7 @@ let audioContext, analyser, dataArray, bgAudio;
           
           // Spawn extra sparkles if scrolling fast!
           let isScrollingFast = Math.abs(scrollVelocity) > 10;
-          let spawnChance = isScrollingFast ? 0.6 : 0.4;
+          let spawnChance = isScrollingFast ? 0.2 : 0.08;
           
           if (Math.random() < spawnChance && wave.points.length > 0) {
               let pt = wave.points[Math.floor(Math.random() * wave.points.length)];
@@ -302,6 +302,7 @@ let audioContext, analyser, dataArray, bgAudio;
               sparkles.push(sparkle);
           }
       });
+      if (sparkles.length > 60) sparkles.splice(0, sparkles.length - 60);
       for (let i = sparkles.length - 1; i >= 0; i--) {
           sparkles[i].update(elapsed, bassImpact); sparkles[i].draw(context, bassImpact);
           if (sparkles[i].alpha <= 0 || sparkles[i].y < -50 || sparkles[i].y > height + 50) sparkles.splice(i, 1);
@@ -377,6 +378,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 });
+
+
 
 
 

@@ -178,6 +178,18 @@
   let pointerX = 0, pointerY = 0, smoothX = 0, smoothY = 0;
 
   let lastScrollYPos = window.scrollY;
+let audioContext, analyser, dataArray, bgAudio;
+  let bassImpact = 0, isMusicPlaying = false;
+  function initAudio() {
+      if (audioContext) { if (audioContext.state === 'suspended') audioContext.resume(); return; }
+      bgAudio = new Audio('assets/bg-music.mp3'); bgAudio.loop = true; bgAudio.volume = 0.5;
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioContext.createAnalyser();
+      const source = audioContext.createMediaElementSource(bgAudio);
+      source.connect(analyser); analyser.connect(audioContext.destination);
+      analyser.fftSize = 256; dataArray = new Uint8Array(analyser.frequencyBinCount);
+      bgAudio.play().then(() => { isMusicPlaying = true; }).catch(e => console.warn(e));
+  }
   let scrollVelocity = 0;
 
   class SilkWave {
@@ -186,18 +198,42 @@
           this.speed = speed; this.originalYOffset = yOffset; this.yOffset = yOffset; 
           this.step = 0; this.points = [];
       }
-      draw(ctx, w, h) {
+      draw(ctx, w, h, bass = 0) {
           ctx.beginPath(); ctx.moveTo(0, h); this.points = [];
+          let curAmp = this.amplitude * (1 + bass * 0.4); 
+          let curFreq = this.frequency * (1 - bass * 0.1);
           for (let x = 0; x <= w; x += 10) {
-              let y = Math.sin(x * this.frequency + this.step) * this.amplitude + 
-                      Math.cos(x * (this.frequency * 0.6) + this.step * 0.4) * (this.amplitude * 0.6) + 
-                      (h * this.yOffset);
+              let y = Math.sin(x * curFreq + this.step) * curAmp + 
+                      Math.cos(x * (curFreq * 0.6) + this.step * 0.4) * (curAmp * 0.6) + 
+                      (h * this.yOffset) + (bass * 30 * Math.sin(x * 0.01 + this.step * 5));
               ctx.lineTo(x, y);
               if (x % 40 === 0) this.points.push({x, y});
           }
           ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
+          ctx.globalAlpha = 1 + (bass * 0.5);
           ctx.fillStyle = this.color; ctx.fill();
-          this.step += this.speed; 
+          ctx.globalAlpha = 1;
+          this.step += this.speed * (1 + bass * 2.5); 
+      }
+  }
+  class Sparkle {
+      constructor(x, y) {
+          this.x = x; this.y = y; this.size = Math.random() * 2.5 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 0.5; this.speedY = -Math.random() * 0.8 - 0.2;
+          this.alpha = 1; this.decay = Math.random() * 0.008 + 0.003;
+          const goldTones = ['rgba(212,175,55,', 'rgba(255,215,0,', 'rgba(244,196,48,'];
+          this.colorBase = goldTones[Math.floor(Math.random() * goldTones.length)];
+      }
+      update(elapsed, bass = 0) { 
+          this.x += this.speedX * elapsed * (1 + bass * 2); 
+          this.y += this.speedY * elapsed * (1 + bass * 3.5); 
+          this.alpha -= this.decay * elapsed; 
+          this.size += bass * 0.1; 
+      }
+      draw(ctx, bass = 0) {
+          ctx.save(); ctx.beginPath(); ctx.arc(this.x, this.y, this.size * (1 + bass), 0, Math.PI * 2);
+          ctx.shadowBlur = this.size * (3 + bass * 12); ctx.shadowColor = 'rgba(255, 215, 0, 1)';
+          ctx.fillStyle = this.colorBase + this.alpha + ')'; ctx.fill(); ctx.restore();
       }
   }
   class Sparkle {
@@ -246,16 +282,23 @@
     
     // Smooth scroll velocity decay
     scrollVelocity *= 0.9;
+    
+    if (analyser && isMusicPlaying) {
+        analyser.getByteFrequencyData(dataArray);
+        let bassSum = 0;
+        for (let i = 0; i < 5; i++) { bassSum += dataArray[i]; }
+        let bassAvg = bassSum / 5;
+        bassImpact += ((bassAvg / 255) - bassImpact) * 0.25; 
+    } else {
+        bassImpact *= 0.9;
+    }
 
     if (context) {
       context.clearRect(0, 0, width, height);
       waves.forEach(wave => {
-          // React to scroll: waves shift vertically
           wave.yOffset -= scrollVelocity * 0.0005;
-          // Spring back to original position smoothly
           wave.yOffset += (wave.originalYOffset - wave.yOffset) * 0.05;
-          
-          wave.draw(context, width, height);
+          wave.draw(context, width, height, bassImpact);
           
           // Spawn extra sparkles if scrolling fast!
           let isScrollingFast = Math.abs(scrollVelocity) > 10;
@@ -313,6 +356,10 @@
   replayButton.hidden = typeof opening?.showModal !== "function";
 
   syncLanguage(language);
+
+  document.getElementById("open-invitation")?.addEventListener("click", initAudio, {once:true});
+  document.getElementById("skip-opening")?.addEventListener("click", initAudio, {once:true});
+
   if (location.hash) showContent(); else showOpening();
 })();
 

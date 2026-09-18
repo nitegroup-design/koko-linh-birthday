@@ -200,23 +200,43 @@ let audioContext, analyser, dataArray, bgAudio;
       }
       draw(ctx, w, h, bass = 0) {
           ctx.beginPath(); ctx.moveTo(0, h); this.points = [];
-          let curAmp = this.amplitude * (1 + bass * 0.4); 
-          let curFreq = this.frequency * (1 - bass * 0.1);
+          let curAmp = this.amplitude * (1 + bass * 0.05); 
+          let curFreq = this.frequency;
           for (let x = 0; x <= w; x += 10) {
               let y = Math.sin(x * curFreq + this.step) * curAmp + 
                       Math.cos(x * (curFreq * 0.6) + this.step * 0.4) * (curAmp * 0.6) + 
-                      (h * this.yOffset) + (bass * 30 * Math.sin(x * 0.01 + this.step * 5));
+                      (h * this.yOffset);
               ctx.lineTo(x, y);
               if (x % 40 === 0) this.points.push({x, y});
           }
           ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
-          ctx.globalAlpha = 1 + (bass * 0.5);
+          ctx.globalAlpha = 1 + (bass * 0.15);
           ctx.fillStyle = this.color; ctx.fill();
           ctx.globalAlpha = 1;
-          this.step += this.speed * (1 + bass * 2.5); 
+          this.step += this.speed * (1 + bass * 0.3); 
       }
   }
   
+  class Sparkle {
+      constructor(x, y) {
+          this.x = x; this.y = y; this.size = Math.random() * 2.5 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 0.5; this.speedY = -Math.random() * 1.2 - 0.3;
+          this.alpha = 1; this.decay = Math.random() * 0.005 + 0.001;
+          const goldTones = ['rgba(212,175,55,', 'rgba(255,215,0,', 'rgba(244,196,48,'];
+          this.colorBase = goldTones[Math.floor(Math.random() * goldTones.length)];
+      }
+      update(elapsed, bass = 0) { 
+          this.x += this.speedX * elapsed; 
+          this.y += this.speedY * elapsed * (1 + bass * 0.8); 
+          this.alpha -= this.decay * elapsed; 
+          this.size += bass * 0.1; 
+      }
+      draw(ctx, bass = 0) {
+          ctx.save(); ctx.beginPath(); ctx.arc(this.x, this.y, this.size * (1 + bass), 0, Math.PI * 2);
+          ctx.shadowBlur = this.size * (5 + bass * 20); ctx.shadowColor = 'rgba(255, 215, 0, 1)';
+          ctx.fillStyle = this.colorBase + this.alpha + ')'; ctx.fill(); ctx.restore();
+      }
+  }
   let waves = [], sparkles = [];
 
   function resizeCanvas() {
@@ -268,7 +288,7 @@ let audioContext, analyser, dataArray, bgAudio;
           
           // Spawn extra sparkles if scrolling fast!
           let isScrollingFast = Math.abs(scrollVelocity) > 10;
-          let spawnChance = isScrollingFast ? 0.4 : 0.15;
+          let spawnChance = isScrollingFast ? 0.6 : 0.4;
           
           if (Math.random() < spawnChance && wave.points.length > 0) {
               let pt = wave.points[Math.floor(Math.random() * wave.points.length)];
@@ -283,7 +303,7 @@ let audioContext, analyser, dataArray, bgAudio;
           }
       });
       for (let i = sparkles.length - 1; i >= 0; i--) {
-          sparkles[i].update(); sparkles[i].draw(context);
+          sparkles[i].update(elapsed, bassImpact); sparkles[i].draw(context, bassImpact);
           if (sparkles[i].alpha <= 0 || sparkles[i].y < -50 || sparkles[i].y > height + 50) sparkles.splice(i, 1);
       }
     }
@@ -357,4 +377,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 });
+
+
 

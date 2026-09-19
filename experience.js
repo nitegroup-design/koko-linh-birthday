@@ -157,7 +157,7 @@
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (!isIOS) {
         e.preventDefault(); // Prevent downloading the file
-        const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Koko+Linh%27s+Birthday+-+The+Ruby+Soir%C3%A9e&dates=20260926T110000Z/20260926T150000Z&details=Time:+18:00+(Vietnam+Time)%0ATheme:+Scarlet+Noir%0ADress+Code:+Costume+(Anime,+European,+Royal...)%0AVenue:+Yoyo+Central+Ho+Con+Rua,+No.+1+Cong+Truong+Quoc+Te,+HCMC&location=Yoyo+Central+Ho+Con+Rua,+No.+1+Cong+Truong+Quoc+Te,+HCMC';
+        const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Koko+Linh%27s+Birthday+-+The+Ruby+Soir%C3%A9e&dates=20260926T103000Z/20260926T150000Z&details=Time:+17:30+(Vietnam+Time)%0ATheme:+Scarlet+Noir%0ADress+Code:+Costume+(Anime,+European,+Royal...)%0AVenue:+Yoyo+Central+Ho+Con+Rua,+No.+1+Cong+Truong+Quoc+Te,+HCMC&location=Yoyo+Central+Ho+Con+Rua,+No.+1+Cong+Truong+Quoc+Te,+HCMC';
         window.open(googleCalendarUrl, '_blank');
     } else {
         const toast = document.getElementById("toast");

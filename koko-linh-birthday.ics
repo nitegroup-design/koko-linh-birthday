@@ -5,10 +5,10 @@ CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:koko-linh-birthday-20260926@invitation.local
 DTSTAMP:20260914T030000Z
-DTSTART:20260926T110000Z
+DTSTART:20260926T103000Z
 DTEND:20260926T150000Z
 SUMMARY:Koko Linh's Birthday - The Ruby Soirée
-DESCRIPTION:Koko Linh's Birthday Party.\n\nTime: 18:00 (Vietnam Time)\nTheme: Scarlet Noir\nDress Code: Costume (Anime, European, Royal...)\nVenue: Yoyo Central Hồ Con Rùa\nAddress: Số 1, Công Trường Quốc Tế, Phường Xuân Hoà, Tp.HCM
+DESCRIPTION:Koko Linh's Birthday Party.\n\nTime: 17:30 (Vietnam Time)\nTheme: Scarlet Noir\nDress Code: Costume (Anime, European, Royal...)\nVenue: Yoyo Central Hồ Con Rùa\nAddress: Số 1, Công Trường Quốc Tế, Phường Xuân Hoà, Tp.HCM
 LOCATION:Yoyo Central Hồ Con Rùa, Số 1 Công Trường Quốc Tế, Tp.HCM
 STATUS:CONFIRMED
 TRANSP:OPAQUE
